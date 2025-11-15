@@ -19,8 +19,8 @@ app.include_router(users.router)
 
 @app.get("/status", response_model=AppStatus)
 def get_status():
-    """Возвращает статус сервиса"""
-    return {"status": "ok"}
+    from app.database.engine import check_availability
+    return AppStatus(database=check_availability())
 
 if __name__ == "__main__":
     create_db_and_tables()

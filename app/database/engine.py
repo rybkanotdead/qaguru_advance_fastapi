@@ -17,7 +17,8 @@ def create_db_and_tables():
 def check_availability() -> bool:
     try:
         with Session(engine) as session:
-            session.exec("SELECT 1")  # простая проверка соединения
+            session.execute(text("SELECT 1"))
         return True
-    except Exception:
+    except Exception as e:
+        print("DB connection error:", e)
         return False
